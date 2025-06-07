@@ -115,67 +115,67 @@ hr {
   </div>
   <div>
     <label for="accA">บ.ช ตามสั่ง</label>
-    <input id="accA" type="text" placeholder="บัญชี ตามสั่ง" />
+    <input id="accA" type="text" placeholder="เงินในบัญชีตามสั่ง" />
   </div>
   <div>
     <label for="accB">บ.ช ขาหมู</label>
-    <input id="accB" type="text" placeholder="บัญชี ขาหมู" />
+    <input id="accB" type="text" placeholder="เงินในบัญชีขาหมู" />
   </div>
 </div>
 
 <!-- ขาย -->
 <div class="row-2col">
 <div class="col">
-    <label for="a">💰 ขายตามสั่ง</label>
-    <input id="a" type="number" />
+    <label for="a">💰 ยอดขายตามสั่ง</label>
+    <input id="a" type="number"placeholder="ยอดขายตามสั่ง" />
 </div>
 <div class="col">
-    <label for="b">💰 ขายขาหมู</label>
-    <input id="b" type="number" />
+    <label for="b">💰 ยอดขายขาหมู</label>
+    <input id="b" type="number" placeholder="ยอดขายขาหมู"/>
 </div>
 </div>
-<div class="result" id="t">รวม: 0</div>
+<div class="result" id="t">ยอดขายรวม: 0</div>
 <hr>
 
 <!-- รายจ่าย -->
 <div class="row-2col">
 <div class="col">
-    <label for="ice">🧊 น้ำแข็ง</label>
-    <input id="ice" type="number" />
+    <label for="ice">🧊 ค่าน้ำแข็ง</label>
+    <input id="ice" type="number" placeholder="ค่าน้ำแข็ง" />
 </div>
 <div class="col">
     <label for="rent">🏠 ค่าเช่า</label>
-    <input id="rent" type="number" />
+    <input id="rent" type="number" placeholder="ค่าเช่า"/>
 </div>
 </div>
 <div class="row-2col">
 <div class="col">
-    <label for="buy">🛒 ซื้อของ</label>
-    <input id="buy" type="number" />
+    <label for="buy">🛒 ค่าซื้อของอื่นๆ</label>
+    <input id="buy" type="number"  placeholder="ค่าซื้อของอื่นๆ"/>
 </div>
 </div>
-<div class="result" id="e">จ่ายรวม: 0</div>
-<div class="result" id="n">เหลือก่อนจ่ายตลาด: 0</div>
+<div class="result" id="e">ค่าใช้จ่ายรวม: 0</div>
+<div class="result" id="n">เงินเหลือก่อนจ่ายตลาด: 0</div>
 
 <!-- เช็คเงินในระบบ -->
 <div class="row-2col" style="margin-top:20px;">
   <div class="col">
-    <label for="sysAccB">บ.ช ขาหมู (เงินในระบบ)</label>
-    <input id="sysAccB" type="number" placeholder="กรอกยอดเงิน" />
+    <label for="sysAccB">บ.ช ขาหมู (เงินในบัญชี)</label>
+    <input id="sysAccB" type="number" placeholder="เงินในบัญชีขาหมู" />
   </div>
   <div class="col">
-    <label for="sysAccA">บ.ช ตามสั่ง (เงินในระบบ)</label>
-    <input id="sysAccA" type="number" placeholder="กรอกยอดเงิน" />
+    <label for="sysAccA">บ.ช ตามสั่ง (เงินในบัญชี)</label>
+    <input id="sysAccA" type="number" placeholder="เงินในบัญชีตามสั่ง" />
   </div>
 </div>
 <div class="row-2col" style="margin-bottom:20px;">
   <div class="col">
     <label for="cashB">เงินสด ขาหมู</label>
-    <input id="cashB" type="number" placeholder="กรอกยอดเงิน" />
+    <input id="cashB" type="number" placeholder="เงินสด ขาหมู" />
   </div>
   <div class="col">
     <label for="cashA">เงินสด ตามสั่ง</label>
-    <input id="cashA" type="number" placeholder="กรอกยอดเงิน" />
+    <input id="cashA" type="number" placeholder="เงินสดตามสั่ง" />
   </div>
 </div>
 <div class="result" id="check">รวมเงินที่มีในกระเป๋าวันนี้: 0 </div>
@@ -185,40 +185,40 @@ hr {
 <!-- ตลาด -->
 <div class="row-2col">
 <div class="col">
-    <label for="mA">🥬 ตลาดตามสั่ง</label>
-    <input id="mA" type="number" />
+    <label for="mA">🥬 จ่ายตลาดตามสั่ง</label>
+    <input id="mA" type="number"placeholder="จ่ายตลาดตามสั่ง" />
 </div>
 <div class="col">
-    <label for="mB">🥩 ตลาดขาหมู</label>
-    <input id="mB" type="number" />
+    <label for="mB">🥩 จ่ายตลาดขาหมู</label>
+    <input id="mB" type="number" placeholder="จ่ายตลาดขาหมู"/>
 </div>
 </div>
 <div class="result" id="m">จ่ายตลาดรวม: 0</div>
 <hr>
 
 <!-- กำไร -->
-<div class="result" id="p">กำไรก่อนค่าแรง: 0</div>
+<div class="result" id="p">กำไรที่ได้ก่อนหักค่าแรง: 0</div>
 <hr>
 
 <!-- ค่าแรงและอื่นๆ -->
 <div class="row-2col">
 <div class="col">
     <label for="m1">👨‍🍳 มาร์ช/แม่</label>
-    <input id="m1" type="number" />
+    <input id="m1" type="number"placeholder="ค่าจ้าง" />
 </div>
 <div class="col">
     <label for="beer">🍺 เบียร์</label>
-    <input id="beer" type="number" />
+    <input id="beer" type="number" placeholder="ค่าเบียร์"/>
 </div>
 </div>
 <div class="row-2col">
 <div class="col">
     <label for="oil">⛽ น้ำมัน</label>
-    <input id="oil" type="number" />
+    <input id="oil" type="number"placeholder="ค่าน้ำมัน" />
 </div>
 <div class="col">
     <label for="more">🧾 อื่นๆ</label>
-    <input id="more" type="number" />
+    <input id="more" type="number"placeholder="อื่นๆ" />
 </div>
 </div>
 <div class="result" id="f">💵 กำไรสุทธิ: 0</div>
