@@ -98,6 +98,31 @@
   <hr>
   <div id="netProfit">เงินคงเหลือ: 0 บาท</div>
   <div id="profitBeforeLabor">กำไรทั้งหมดก่อนหักค่าแรง: 0 บาท</div>
+   <div>
+       <hr>
+
+    <label for="laborMarsh">ค่าแรงมาร์ช (บาท):</label>
+    <input type="number" id="laborMarsh" min="0" step="0.01" placeholder="กรอกค่าแรงมาร์ช" />
+  </div>
+
+  <div>
+    <label for="laborMom">ค่าแรงแม่ (บาท):</label>
+    <input type="number" id="laborMom" min="0" step="0.01" placeholder="กรอกค่าแรงแม่" />
+  </div>
+
+  <div>
+    <label for="allowance">ค่าเบีย (บาท):</label>
+    <input type="number" id="allowance" min="0" step="0.01" placeholder="กรอกค่าเบีย" />
+  </div>
+
+  <div>
+    <label for="fuel">ค่าน้ำมัน (บาท):</label>
+    <input type="number" id="fuel" min="0" step="0.01" placeholder="กรอกค่าน้ำมัน" />
+  </div>
+
+  <div id="finalProfit" style="margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: #bb0000;">
+    กำไรสุทธิหลังหักค่าแรงและค่าใช้จ่ายทั้งหมด: 0 บาท
+  </div>
 
   <script>
     // แสดงวันที่ปัจจุบันแบบไทย (ปี ค.ศ.)
@@ -137,7 +162,15 @@
       const profitBeforeLabor = totalSales - totalExpenses - totalMarketCost;
       document.getElementById('profitBeforeLabor').textContent = กำไรทั้งหมดก่อนหักค่าแรง: ${profitBeforeLabor.toFixed(2)} บาท;
     }
+ // ค่าแรง + ค่าเบีย + ค่าน้ำมัน
+    const laborMarsh = parseFloat(document.getElementById('laborMarsh').value) || 0;
+    const laborMom = parseFloat(document.getElementById('laborMom').value) || 0;
+    const allowance = parseFloat(document.getElementById('allowance').value) || 0;
+    const fuel = parseFloat(document.getElementById('fuel').value) || 0;
 
+    const finalProfit = profitBeforeLabor - laborMarsh - laborMom - allowance - fuel;
+    document.getElementById('finalProfit').textContent = `กำไรสุทธิหลังหักค่าแรงและค่าใช้จ่ายทั้งหมด: ${finalProfit.toFixed(2)} บาท`;
+  }
     // เพิ่ม event listener ให้ทุกช่อง input
     ['saleA', 'saleB', 'iceCost', 'rentCost', 'extraBuyCost', 'marketCostA', 'marketCostB'].forEach(id => {
       document.getElementById(id).addEventListener('input', calculateTotal);
