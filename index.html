@@ -115,6 +115,72 @@
       background-color: #ffcc80;
       cursor: pointer;
     }
+
+    /* Calculator Modal */
+    #calcModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1001;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      max-width: 320px;
+    }
+
+    #calcOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+
+    #calcDisplay {
+      width: 100%;
+      font-size: 28px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      text-align: right;
+    }
+
+    #calcButtons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    #calcButtons button {
+      font-size: 24px;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #f0f0f0;
+      cursor: pointer;
+    }
+
+    .equals {
+      background: #4caf50;
+      color: white;
+    }
+
+    .close-btn {
+      margin-top: 12px;
+      background: #f44336;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
@@ -159,7 +225,7 @@
     <label for="buy">🛒 ค่าซื้อของอื่นๆ</label>
     <div class="calc-container">
       <input id="buy" type="number" placeholder="ค่าซื้อของอื่นๆ" />
-      <button class="calc-button" onclick="openCalculator()">🧮</button>
+      <button class="calc-button" onclick="showCalculator()">🧮</button>
     </div>
   </div>
 </div>
@@ -227,64 +293,122 @@
 </div>
 <div class="result" id="f">💵 กำไรสุทธิ: 0</div>
 
+<!-- Calculator Modal -->
+<div id="calcModal">
+  <input type="text" id="calcDisplay" readonly onkeydown="calcKey(event)" />
+  <div id="calcButtons">
+    <button onclick="calcClear()">C</button>
+    <button onclick="calcBack()">⌫</button>
+    <button onclick="calcAppend('/')">÷</button>
+    <button onclick="calcAppend('*')">×</button>
+    <button onclick="calcAppend('7')">7</button>
+    <button onclick="calcAppend('8')">8</button>
+    <button onclick="calcAppend('9')">9</button>
+    <button onclick="calcAppend('-')">−</button>
+    <button onclick="calcAppend('4')">4</button>
+    <button onclick="calcAppend('5')">5</button>
+    <button onclick="calcAppend('6')">6</button>
+    <button onclick="calcAppend('+')">+</button>
+    <button onclick="calcAppend('1')">1</button>
+    <button onclick="calcAppend('2')">2</button>
+    <button onclick="calcAppend('3')">3</button>
+    <button onclick="calcCalculate()" class="equals">=</button>
+    <button onclick="calcAppend('0')" style="grid-column: span 2;">0</button>
+    <button onclick="calcAppend('.')">.</button>
+  </div>
+  <button onclick="calcClose()" class="close-btn">ปิดเครื่องคิดเลข</button>
+</div>
+<div id="calcOverlay" onclick="calcClose()"></div>
+
 <script>
-const $ = id => document.getElementById(id);
+  const $ = id => document.getElementById(id);
 
-function update() {
-  let a = +$('a').value || 0, b = +$('b').value || 0;
-  let total = a + b;
-  $('t').textContent = `ยอดขายรวม: ${total.toFixed(2)}`;
+  function update() {
+    let a = +$('a').value || 0, b = +$('b').value || 0;
+    let total = a + b;
+    $('t').textContent = `ยอดขายรวม: ${total.toFixed(2)}`;
 
-  let e = (+$('ice').value || 0) + (+$('rent').value || 0) + (+$('buy').value || 0);
-  $('e').textContent = `ค่าใช้จ่ายรวม: ${e.toFixed(2)}`;
+    let e = (+$('ice').value || 0) + (+$('rent').value || 0) + (+$('buy').value || 0);
+    $('e').textContent = `ค่าใช้จ่ายรวม: ${e.toFixed(2)}`;
 
-  let m = (+$('mA').value || 0) + (+$('mB').value || 0);
-  $('m').textContent = `จ่ายตลาดรวม: ${m.toFixed(2)}`;
+    let m = (+$('mA').value || 0) + (+$('mB').value || 0);
+    $('m').textContent = `จ่ายตลาดรวม: ${m.toFixed(2)}`;
 
-  let n = total - e;
-  $('n').textContent = `เงินเหลือก่อนจ่ายตลาด: ${n.toFixed(2)}`;
+    let n = total - e;
+    $('n').textContent = `เงินเหลือก่อนจ่ายตลาด: ${n.toFixed(2)}`;
 
-  let accA = +$('accA').value || 0;
-  let accB = +$('accB').value || 0;
-  let sysAccA = +$('sysAccA').value || 0;
-  let sysAccB = +$('sysAccB').value || 0;
-  let cashA = +$('cashA').value || 0;
-  let cashB = +$('cashB').value || 0;
+    let accA = +$('accA').value || 0;
+    let accB = +$('accB').value || 0;
+    let sysAccA = +$('sysAccA').value || 0;
+    let sysAccB = +$('sysAccB').value || 0;
+    let cashA = +$('cashA').value || 0;
+    let cashB = +$('cashB').value || 0;
 
-  let sumSys = (sysAccA - accA) + (sysAccB - accB) + cashA + cashB;
-  let diff = sumSys - n;
-  let status = Math.abs(diff) < 0.01 ? '✅ เงินตรงกัน' : `❌ ไม่ตรงกัน ${diff.toFixed(2)} บาท`;
-  $('check').textContent = `รวมเงินที่ได้วันนี้ ${sumSys.toFixed(2)} ${status}`;
+    let sumSys = (sysAccA - accA) + (sysAccB - accB) + cashA + cashB;
+    let diff = sumSys - n;
+    let status = Math.abs(diff) < 0.01 ? '✅ เงินตรงกัน' : `❌ ไม่ตรงกัน ${diff.toFixed(2)} บาท`;
+    $('check').textContent = `รวมเงินที่ได้วันนี้ ${sumSys.toFixed(2)} ${status}`;
 
-  let p = n - m;
-  $('p').textContent = `กำไรก่อนค่าแรง: ${p.toFixed(2)}`;
+    let p = n - m;
+    $('p').textContent = `กำไรก่อนค่าแรง: ${p.toFixed(2)}`;
 
-  let f = p - ((+$('m1').value || 0) + (+$('beer').value || 0) + (+$('oil').value || 0) + (+$('more').value || 0));
-  $('f').textContent = `💵 กำไรสุทธิ: ${f.toFixed(2)}`;
-}
+    let f = p - ((+$('m1').value || 0) + (+$('beer').value || 0) + (+$('oil').value || 0) + (+$('more').value || 0));
+    $('f').textContent = `💵 กำไรสุทธิ: ${f.toFixed(2)}`;
+  }
 
-['a','b','ice','rent','buy','mA','mB','m1','beer','oil','more','sysAccB','sysAccA','cashB','cashA','accA','accB']
-  .forEach(id => $(id).addEventListener('input', update));
+  ['a','b','ice','rent','buy','mA','mB','m1','beer','oil','more','sysAccB','sysAccA','cashB','cashA','accA','accB']
+    .forEach(id => $(id).addEventListener('input', update));
 
-function openCalculator() {
-  let input = prompt("ใส่รายการแยกด้วยเครื่องหมาย + ");
-  if (input) {
+  function showCalculator() {
+    $('calcModal').style.display = 'block';
+    $('calcOverlay').style.display = 'block';
+    $('calcDisplay').value = '';
+  }
+
+  function calcClose() {
+    $('calcModal').style.display = 'none';
+    $('calcOverlay').style.display = 'none';
+  }
+
+  function calcAppend(char) {
+    const display = $('calcDisplay');
+    if (char === '.' && display.value.split(/[\+\-\*\/]/).pop().includes('.')) return;
+    display.value += char;
+  }
+
+  function calcClear() {
+    $('calcDisplay').value = '';
+  }
+
+  function calcBack() {
+    $('calcDisplay').value = $('calcDisplay').value.slice(0, -1);
+  }
+
+  function calcCalculate() {
+    const display = $('calcDisplay');
     try {
-      let result = eval(input.replace(/[^0-9+.\-*/()]/g, ''));
+      let result = eval(display.value.replace(/[^0-9+\-*/().]/g, ''));
       if (!isNaN(result)) {
-        $('buy').value = result.toFixed(2);
+        result = +result.toFixed(2);
+        display.value = result;
+        $('buy').value = result;
         update();
       } else {
-        alert("ใส่ตัวเลขไม่ถูกต้อง");
+        alert("ผลลัพธ์ไม่ถูกต้อง");
       }
-    } catch (e) {
-      alert("สูตรผิดพลาด");
+    } catch {
+      alert("สูตรไม่ถูกต้อง");
     }
   }
-}
 
-$('d').textContent = new Date().toLocaleDateString('th-TH');
+  function calcKey(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      calcCalculate();
+    }
+  }
+
+  $('d').textContent = new Date().toLocaleDateString('th-TH');
 </script>
-
 </body>
 </html>
