@@ -58,7 +58,18 @@
 </head>
 <body>
 
-<div>📅 วันที่: <span id="d"></span></div>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
+  <div>📅 ว/ด/ป: <span id="d"></span></div>
+  <div style="display: flex; align-items: center;">
+    <label for="bank" style="margin-right: 10px;">💸 บ.ช.ตามสั่ง:</label>
+    <input id="bank" type="number" placeholder="เช่น 1000" style="font-size: 32px; padding: 5px 10px; border: 2px solid #ccc; border-radius: 8px;" />
+  </div>
+  <div style="display: flex; align-items: center;">
+    <label for="bank" style="margin-right: 10px;">💸 บ.ช.ขาหมู:</label>
+    <input id="bank" type="number" placeholder="เช่น 1000" style="font-size: 32px; padding: 5px 10px; border: 2px solid #ccc; border-radius: 8px;" />
+  </div>
+</div>
+
 
 <div class="row">
   <label for="a">💰 ขายตามสั่ง</label>
