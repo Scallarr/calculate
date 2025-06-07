@@ -19,11 +19,12 @@
       flex-wrap: wrap;
     }
 
-    .header-row > div {
-      display: flex;
-      flex-direction: column;
-      min-width: 180px;
-    }
+.header-row > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px; /* หรือ 120px ถ้าอยากให้ยืดหยุ่นมากขึ้น */
+  flex: 1; /* เพิ่มเพื่อให้มันยืดเท่ากันในแนวกว้าง */
+}
 
     .header-row label {
       font-size: 22px;
@@ -67,66 +68,51 @@
     background-color: #fff;
     }
 
-    .result {
-      width: 98%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-top: 10px;
-      font-weight: bold;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 32px;
-    }
+  .result {
+width: 98%;  /* หรือขนาดที่ต้องการ */
+white-space: nowrap; /* ไม่ตัดคำ */
+overflow: hidden; /* ซ่อนเกิน */
+text-overflow: ellipsis; /* ใส่ ... ถ้าข้อความยาวเกิน */
+/* ที่เหลือคงเดิม */
+margin-top: 10px;
+font-weight: bold;
+padding: 15px;
+border-radius: 10px;
+font-size: 32px;
+}
 
-    #t { background: #e0f7fa; color: #00796b; }
-    #e { background: #fff3e0; color: #e65100; }
-    #m { background: #fce4ec; color: #c2185b; }
-    #n { background: #f3e5f5; color: #6a1b9a; }
-    #p { background: #e8f5e9; color: #2e7d32; }
-    #f { background: #ffebee; color: #b71c1c; }
-    #check { background: #e3f2fd; color: #0d47a1; margin-top: 15px; }
+#t { background: #e0f7fa; color: #00796b; }
+#e { background: #fff3e0; color: #e65100; }
+#m { background: #fce4ec; color: #c2185b; }
+#n { background: #f3e5f5; color: #6a1b9a; }
+#p { background: #e8f5e9; color: #2e7d32; }
+#f { background: #ffebee; color: #b71c1c; }
+#check { background: #e3f2fd; color: #0d47a1; margin-top: 15px; }
 
-    hr {
-      margin: 30px 0;
-      border: none;
-      height: 2px;
-      background-color: #ccc;
-    }
+hr {
+    margin: 30px 0;
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+}
 
-    .print-button {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .print-button button {
-      font-size: 24px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background-color: #0d47a1;
-      color: white;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .row-2col, .header-row {
+@media (max-width: 768px) {
+    .row-2col {
         flex-direction: column;
-      }
     }
-
-    @media print {
-      .print-button {
-        display: none;
-      }
+    .header-row {
+      flex-direction: column;
     }
+}
 </style>
 </head>
 <body>
 
 <!-- วันที่และ บ.ช -->
 <div class="header-row">
-  <div>📅 ว/ด/ป: <span id="d"></span></div>
+  <div>
+    📅 ว/ด/ป: <span id="d"></span>
+  </div>
   <div>
     <label for="accA">บ.ช ตามสั่ง</label>
     <input id="accA" type="text" placeholder="บัญชี ตามสั่ง" />
@@ -139,34 +125,34 @@
 
 <!-- ขาย -->
 <div class="row-2col">
-  <div class="col">
-      <label for="a">💰 ขายตามสั่ง</label>
-      <input id="a" type="number" />
-  </div>
-  <div class="col">
-      <label for="b">💰 ขายขาหมู</label>
-      <input id="b" type="number" />
-  </div>
+<div class="col">
+    <label for="a">💰 ขายตามสั่ง</label>
+    <input id="a" type="number" />
+</div>
+<div class="col">
+    <label for="b">💰 ขายขาหมู</label>
+    <input id="b" type="number" />
+</div>
 </div>
 <div class="result" id="t">รวม: 0</div>
 <hr>
 
 <!-- รายจ่าย -->
 <div class="row-2col">
-  <div class="col">
-      <label for="ice">🧊 น้ำแข็ง</label>
-      <input id="ice" type="number" />
-  </div>
-  <div class="col">
-      <label for="rent">🏠 ค่าเช่า</label>
-      <input id="rent" type="number" />
-  </div>
+<div class="col">
+    <label for="ice">🧊 น้ำแข็ง</label>
+    <input id="ice" type="number" />
+</div>
+<div class="col">
+    <label for="rent">🏠 ค่าเช่า</label>
+    <input id="rent" type="number" />
+</div>
 </div>
 <div class="row-2col">
-  <div class="col">
-      <label for="buy">🛒 ซื้อของ</label>
-      <input id="buy" type="number" />
-  </div>
+<div class="col">
+    <label for="buy">🛒 ซื้อของ</label>
+    <input id="buy" type="number" />
+</div>
 </div>
 <div class="result" id="e">จ่ายรวม: 0</div>
 <div class="result" id="n">เหลือก่อนจ่ายตลาด: 0</div>
@@ -193,18 +179,19 @@
   </div>
 </div>
 <div class="result" id="check">รวมเงินที่มีในกระเป๋าวันนี้: 0 </div>
+
 <hr>
 
 <!-- ตลาด -->
 <div class="row-2col">
-  <div class="col">
-      <label for="mA">🥬 ตลาดตามสั่ง</label>
-      <input id="mA" type="number" />
-  </div>
-  <div class="col">
-      <label for="mB">🥩 ตลาดขาหมู</label>
-      <input id="mB" type="number" />
-  </div>
+<div class="col">
+    <label for="mA">🥬 ตลาดตามสั่ง</label>
+    <input id="mA" type="number" />
+</div>
+<div class="col">
+    <label for="mB">🥩 ตลาดขาหมู</label>
+    <input id="mB" type="number" />
+</div>
 </div>
 <div class="result" id="m">จ่ายตลาดรวม: 0</div>
 <hr>
@@ -215,31 +202,26 @@
 
 <!-- ค่าแรงและอื่นๆ -->
 <div class="row-2col">
-  <div class="col">
-      <label for="m1">👨‍🍳 มาร์ช/แม่</label>
-      <input id="m1" type="number" />
-  </div>
-  <div class="col">
-      <label for="beer">🍺 เบียร์</label>
-      <input id="beer" type="number" />
-  </div>
+<div class="col">
+    <label for="m1">👨‍🍳 มาร์ช/แม่</label>
+    <input id="m1" type="number" />
+</div>
+<div class="col">
+    <label for="beer">🍺 เบียร์</label>
+    <input id="beer" type="number" />
+</div>
 </div>
 <div class="row-2col">
-  <div class="col">
-      <label for="oil">⛽ น้ำมัน</label>
-      <input id="oil" type="number" />
-  </div>
-  <div class="col">
-      <label for="more">🧾 อื่นๆ</label>
-      <input id="more" type="number" />
-  </div>
+<div class="col">
+    <label for="oil">⛽ น้ำมัน</label>
+    <input id="oil" type="number" />
+</div>
+<div class="col">
+    <label for="more">🧾 อื่นๆ</label>
+    <input id="more" type="number" />
+</div>
 </div>
 <div class="result" id="f">💵 กำไรสุทธิ: 0</div>
-
-<!-- ปุ่ม Print -->
-<div class="print-button">
-  <button onclick="window.print()">🖨️ พิมพ์เอกสาร</button>
-</div>
 
 <!-- Script -->
 <script>
@@ -258,24 +240,25 @@ const update = () => {
     let n = total - e;
     $('n').textContent = `เหลือก่อนจ่ายตลาด: ${n.toFixed(2)}`;
 
-    let accA = +$('accA').value || 0;
-    let accB = +$('accB').value || 0;
-    let sysAccB = +$('sysAccB').value || 0;
-    let sysAccA = +$('sysAccA').value || 0;
-    let cashB = +$('cashB').value || 0;
-    let cashA = +$('cashA').value || 0;
-    let sumA = sysAccA - accA;
-    let sumB = sysAccB - accB;
-    let sumSys = sumA + sumB + cashB + cashA;
+   // เช็คเงินในระบบ
+let accA = +$('accA').value || 0;
+let accB = +$('accB').value || 0;
+let sysAccB = +$('sysAccB').value || 0;
+let sysAccA = +$('sysAccA').value || 0;
+let cashB = +$('cashB').value || 0;
+let cashA = +$('cashA').value || 0;
+let sumA=sysAccA-accA;
+let sumb=sysAccB-accB;
+let sumSys = sumA + sumb + cashB + cashA;
 
-    let diff = sumSys - n;
-    let status = '';
-    if (Math.abs(diff) < 0.01) {
-        status = '✅ เงินตรงกัน';
-    } else {
-        status = `❌ ไม่ตรงกัน ${diff.toFixed(2)} บาท`;
-    }
-    $('check').textContent = `รวมเงินที่ได้วันนี้ ${sumSys.toFixed(2)}  ${status}`;
+let diff = sumSys - n;  // ความต่างระหว่างเงินรวมในระบบ กับ เงินเหลือก่อนจ่ายตลาด
+let status = '';
+if (Math.abs(diff) < 0.01) {
+  status = '✅ เงินตรงกัน';
+} else {
+  status = ` ❌ ไม่ตรงกัน ${diff.toFixed(2)} บาท`;
+}
+$('check').textContent = `รวมเงินที่ได้วันนี้ ${sumSys.toFixed(2)}  ${status}`;
 
     let p = n - m;
     $('p').textContent = `กำไรก่อนค่าแรง: ${p.toFixed(2)}`;
@@ -284,10 +267,7 @@ const update = () => {
     $('f').textContent = `💵 กำไรสุทธิ: ${f.toFixed(2)}`;
 };
 
-[
-  'a','b','ice','rent','buy','mA','mB','m1','beer','oil','more',
-  'sysAccB','sysAccA','cashB','cashA','accA','accB'
-].forEach(id => {
+['a','b','ice','rent','buy','mA','mB','m1','beer','oil','more','sysAccB','sysAccA','cashB','cashA'].forEach(id => {
     $(id).addEventListener('input', update);
 });
 
