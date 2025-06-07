@@ -27,11 +27,17 @@
       border: 1px solid #ccc;
       box-sizing: border-box;
     }
-    #total {
+    #total, #expensesTotal, #netProfit {
       margin-top: 20px;
       font-size: 1.2rem;
       font-weight: bold;
       color: #007700;
+    }
+    #expensesTotal {
+      color: #aa5500;
+    }
+    #netProfit {
+      color: #004400;
     }
   </style>
 </head>
@@ -53,7 +59,26 @@
     <input type="number" id="saleB" min="0" step="0.01" placeholder="กรอกยอดขายร้านขาหมู" />
   </div>
 
+  <hr>
+
+  <div>
+    <label for="iceCost">ค่าน้ำแข็ง (บาท):</label>
+    <input type="number" id="iceCost" min="0" step="0.01" placeholder="กรอกค่าน้ำแข็ง" />
+  </div>
+
+  <div>
+    <label for="rentCost">ค่าเช่า (บาท):</label>
+    <input type="number" id="rentCost" min="0" step="0.01" placeholder="กรอกค่าเช่า" />
+  </div>
+
+  <div>
+    <label for="extraBuyCost">เงินซื้อของเพิ่ม (บาท):</label>
+    <input type="number" id="extraBuyCost" min="0" step="0.01" placeholder="กรอกเงินซื้อของเพิ่ม" />
+  </div>
+
   <div id="total">ยอดขายรวม: 0 บาท</div>
+  <div id="expensesTotal">ค่าใช้จ่ายรวม: 0 บาท</div>
+  <div id="netProfit">เงินคงเหลือ: 0 บาท</div>
 
   <script>
     // แสดงวันที่ปัจจุบันแบบไทย (ปี ค.ศ.)
@@ -63,17 +88,29 @@
     }
     document.getElementById('currentDate').textContent = formatDateTH(new Date());
 
-    // ฟังก์ชันคำนวณยอดขายรวม
     function calculateTotal() {
+      // ยอดขาย
       const saleA = parseFloat(document.getElementById('saleA').value) || 0;
       const saleB = parseFloat(document.getElementById('saleB').value) || 0;
-      const total = saleA + saleB;
-      document.getElementById('total').textContent = `ยอดขายรวม: ${total.toFixed(2)} บาท`;
+      const totalSales = saleA + saleB;
+      document.getElementById('total').textContent = `ยอดขายรวม: ${totalSales.toFixed(2)} บาท`;
+
+      // ค่าใช้จ่าย
+      const iceCost = parseFloat(document.getElementById('iceCost').value) || 0;
+      const rentCost = parseFloat(document.getElementById('rentCost').value) || 0;
+      const extraBuyCost = parseFloat(document.getElementById('extraBuyCost').value) || 0;
+      const totalExpenses = iceCost + rentCost + extraBuyCost;
+      document.getElementById('expensesTotal').textContent = `ค่าใช้จ่ายรวม: ${totalExpenses.toFixed(2)} บาท`;
+
+      // เงินคงเหลือ (กำไรเบื้องต้น)
+      const netProfit = totalSales - totalExpenses;
+      document.getElementById('netProfit').textContent = `เงินคงเหลือ: ${netProfit.toFixed(2)} บาท`;
     }
 
-    // เพิ่ม event listener ให้ input ทั้งสองช่อง
-    document.getElementById('saleA').addEventListener('input', calculateTotal);
-    document.getElementById('saleB').addEventListener('input', calculateTotal);
+    // เพิ่ม event listener ให้ทุกช่อง input
+    ['saleA', 'saleB', 'iceCost', 'rentCost', 'extraBuyCost'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calculateTotal);
+    });
   </script>
 </body>
 </html>
