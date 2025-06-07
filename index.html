@@ -27,7 +27,7 @@
       border: 1px solid #ccc;
       box-sizing: border-box;
     }
-    #total, #expensesTotal, #netProfit {
+    #total, #expensesTotal, #marketCostTotal, #netProfit, #profitBeforeLabor {
       margin-top: 20px;
       font-size: 1.2rem;
       font-weight: bold;
@@ -36,8 +36,14 @@
     #expensesTotal {
       color: #aa5500;
     }
+    #marketCostTotal {
+      color: #aa0055;
+    }
     #netProfit {
       color: #004400;
+    }
+    #profitBeforeLabor {
+      color: #005577;
     }
   </style>
 </head>
@@ -76,9 +82,23 @@
     <input type="number" id="extraBuyCost" min="0" step="0.01" placeholder="กรอกเงินซื้อของเพิ่ม" />
   </div>
 
+  <hr>
+
+  <div>
+    <label for="marketCostA">ค่าจ่ายตลาดวันพรุ่งนี้ - อาหารตามสั่ง (บาท):</label>
+    <input type="number" id="marketCostA" min="0" step="0.01" placeholder="กรอกค่าจ่ายตลาดอาหารตามสั่ง" />
+  </div>
+
+  <div>
+    <label for="marketCostB">ค่าจ่ายตลาดวันพรุ่งนี้ - ข้าวขาหมู (บาท):</label>
+    <input type="number" id="marketCostB" min="0" step="0.01" placeholder="กรอกค่าจ่ายตลาดข้าวขาหมู" />
+  </div>
+
   <div id="total">ยอดขายรวม: 0 บาท</div>
   <div id="expensesTotal">ค่าใช้จ่ายรวม: 0 บาท</div>
+  <div id="marketCostTotal">ค่าจ่ายตลาดรวม: 0 บาท</div>
   <div id="netProfit">เงินคงเหลือ: 0 บาท</div>
+  <div id="profitBeforeLabor">กำไรทั้งหมดก่อนหักค่าแรง: 0 บาท</div>
 
   <script>
     // แสดงวันที่ปัจจุบันแบบไทย (ปี ค.ศ.)
@@ -102,13 +122,23 @@
       const totalExpenses = iceCost + rentCost + extraBuyCost;
       document.getElementById('expensesTotal').textContent = `ค่าใช้จ่ายรวม: ${totalExpenses.toFixed(2)} บาท`;
 
-      // เงินคงเหลือ (กำไรเบื้องต้น)
+      // ค่าจ่ายตลาด
+      const marketCostA = parseFloat(document.getElementById('marketCostA').value) || 0;
+      const marketCostB = parseFloat(document.getElementById('marketCostB').value) || 0;
+      const totalMarketCost = marketCostA + marketCostB;
+      document.getElementById('marketCostTotal').textContent = `ค่าจ่ายตลาดรวม: ${totalMarketCost.toFixed(2)} บาท`;
+
+      // เงินคงเหลือ (ยอดขาย - ค่าใช้จ่าย)
       const netProfit = totalSales - totalExpenses;
       document.getElementById('netProfit').textContent = `เงินคงเหลือ: ${netProfit.toFixed(2)} บาท`;
+
+      // กำไรทั้งหมดก่อนหักค่าแรง (ยอดขาย - ค่าใช้จ่าย - ค่าจ่ายตลาด)
+      const profitBeforeLabor = totalSales - totalExpenses - totalMarketCost;
+      document.getElementById('profitBeforeLabor').textContent = `กำไรทั้งหมดก่อนหักค่าแรง: ${profitBeforeLabor.toFixed(2)} บาท`;
     }
 
     // เพิ่ม event listener ให้ทุกช่อง input
-    ['saleA', 'saleB', 'iceCost', 'rentCost', 'extraBuyCost'].forEach(id => {
+    ['saleA', 'saleB', 'iceCost', 'rentCost', 'extraBuyCost', 'marketCostA', 'marketCostB'].forEach(id => {
       document.getElementById(id).addEventListener('input', calculateTotal);
     });
   </script>
