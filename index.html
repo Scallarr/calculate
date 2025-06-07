@@ -6,18 +6,20 @@
   <style>
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      max-width: 400px;
+      max-width: 600px;
       margin: 40px auto;
       padding: 20px;
       background-color: #f0f8ff;
       border-radius: 10px;
       box-shadow: 0 0 10px #aaa;
     }
+
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
     }
+
     input[type="number"] {
       width: 100%;
       padding: 8px;
@@ -27,23 +29,24 @@
       border: 1px solid #ccc;
       box-sizing: border-box;
     }
-    #total, #expensesTotal, #marketCostTotal, #netProfit, #profitBeforeLabor {
+
+    #total, #expensesTotal, #marketCostTotal, #netProfit, #profitBeforeLabor, #netFinalProfit {
       margin-top: 20px;
       font-size: 1.2rem;
       font-weight: bold;
-      color: #007700;
     }
-    #expensesTotal {
-      color: #aa5500;
-    }
-    #marketCostTotal {
-      color: #aa0055;
-    }
-    #netProfit {
-      color: #004400;
-    }
-    #profitBeforeLabor {
-      color: #005577;
+
+    #expensesTotal { color: #aa5500; }
+    #marketCostTotal { color: #aa0055; }
+    #netProfit { color: #004400; }
+    #profitBeforeLabor { color: #005577; }
+    #netFinalProfit { color: #990000; }
+
+    @media screen and (max-width: 600px) {
+      body {
+        margin: 20px;
+        padding: 15px;
+      }
     }
   </style>
 </head>
@@ -57,50 +60,80 @@
 
   <div>
     <label for="saleA">ยอดขายร้านตามสั่ง (บาท):</label>
-    <input type="number" id="saleA" min="0" step="0.01" placeholder="กรอกยอดขายร้านตามสั่ง" />
+    <input type="number" id="saleA" min="0" step="0.01" />
   </div>
 
   <div>
     <label for="saleB">ยอดขายร้านขาหมู (บาท):</label>
-    <input type="number" id="saleB" min="0" step="0.01" placeholder="กรอกยอดขายร้านขาหมู" />
+    <input type="number" id="saleB" min="0" step="0.01" />
   </div>
- <div id="total">ยอดขายรวม: 0 บาท</div>
+  <div id="total">ยอดขายรวม: 0 บาท</div>
+
   <hr>
 
   <div>
     <label for="iceCost">ค่าน้ำแข็ง (บาท):</label>
-    <input type="number" id="iceCost" min="0" step="0.01" placeholder="กรอกค่าน้ำแข็ง" />
+    <input type="number" id="iceCost" min="0" step="0.01" />
   </div>
 
   <div>
     <label for="rentCost">ค่าเช่า (บาท):</label>
-    <input type="number" id="rentCost" min="0" step="0.01" placeholder="กรอกค่าเช่า" />
+    <input type="number" id="rentCost" min="0" step="0.01" />
   </div>
 
   <div>
     <label for="extraBuyCost">เงินซื้อของเพิ่ม (บาท):</label>
-    <input type="number" id="extraBuyCost" min="0" step="0.01" placeholder="กรอกเงินซื้อของเพิ่ม" />
+    <input type="number" id="extraBuyCost" min="0" step="0.01" />
   </div>
-<div id="expensesTotal">ค่าใช้จ่ายรวม: 0 บาท</div>
+  <div id="expensesTotal">ค่าใช้จ่ายรวม: 0 บาท</div>
+
   <hr>
 
   <div>
     <label for="marketCostA">ค่าจ่ายตลาดวันพรุ่งนี้ - อาหารตามสั่ง (บาท):</label>
-    <input type="number" id="marketCostA" min="0" step="0.01" placeholder="กรอกค่าจ่ายตลาดอาหารตามสั่ง" />
+    <input type="number" id="marketCostA" min="0" step="0.01" />
   </div>
 
   <div>
     <label for="marketCostB">ค่าจ่ายตลาดวันพรุ่งนี้ - ข้าวขาหมู (บาท):</label>
-    <input type="number" id="marketCostB" min="0" step="0.01" placeholder="กรอกค่าจ่ายตลาดข้าวขาหมู" />
-    
+    <input type="number" id="marketCostB" min="0" step="0.01" />
   </div>
   <div id="marketCostTotal">ค่าจ่ายตลาดรวม: 0 บาท</div>
+
   <hr>
-  <div id="netProfit">เงินคงเหลือ: 0 บาท</div>
+
+  <div>
+    <label for="laborMarch">ค่าแรงมาร์ช (บาท):</label>
+    <input type="number" id="laborMarch" min="0" step="0.01" />
+  </div>
+
+  <div>
+    <label for="laborMother">ค่าแรงแม่ (บาท):</label>
+    <input type="number" id="laborMother" min="0" step="0.01" />
+  </div>
+
+  <div>
+    <label for="laborBia">ค่าเบียร์ (บาท):</label>
+    <input type="number" id="laborBia" min="0" step="0.01" />
+  </div>
+
+  <div>
+    <label for="oilCost">ค่าน้ำมัน (บาท):</label>
+    <input type="number" id="oilCost" min="0" step="0.01" />
+  </div>
+
+  <div>
+    <label for="otherCost">ค่าใช้จ่ายอื่น ๆ (บาท):</label>
+    <input type="number" id="otherCost" min="0" step="0.01" />
+  </div>
+
+  <hr>
+
+  <div id="netProfit">เงินคงเหลือก่อนจ่ายตลาด: 0 บาท</div>
   <div id="profitBeforeLabor">กำไรทั้งหมดก่อนหักค่าแรง: 0 บาท</div>
+  <div id="netFinalProfit">กำไรสุทธิหลังหักทั้งหมด: 0 บาท</div>
 
   <script>
-    // แสดงวันที่ปัจจุบันแบบไทย (ปี ค.ศ.)
     function formatDateTH(date) {
       const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
       return date.toLocaleDateString('th-TH', options);
@@ -108,38 +141,47 @@
     document.getElementById('currentDate').textContent = formatDateTH(new Date());
 
     function calculateTotal() {
-      // ยอดขาย
-      const saleA = parseFloat(document.getElementById('saleA').value) || 0;
-      const saleB = parseFloat(document.getElementById('saleB').value) || 0;
+      const getValue = id => parseFloat(document.getElementById(id).value) || 0;
+
+      const saleA = getValue('saleA');
+      const saleB = getValue('saleB');
       const totalSales = saleA + saleB;
       document.getElementById('total').textContent = `ยอดขายรวม: ${totalSales.toFixed(2)} บาท`;
 
-      // ค่าใช้จ่าย
-      const iceCost = parseFloat(document.getElementById('iceCost').value) || 0;
-      const rentCost = parseFloat(document.getElementById('rentCost').value) || 0;
-      const extraBuyCost = parseFloat(document.getElementById('extraBuyCost').value) || 0;
+      const iceCost = getValue('iceCost');
+      const rentCost = getValue('rentCost');
+      const extraBuyCost = getValue('extraBuyCost');
       const totalExpenses = iceCost + rentCost + extraBuyCost;
       document.getElementById('expensesTotal').textContent = `ค่าใช้จ่ายรวม: ${totalExpenses.toFixed(2)} บาท`;
 
-      // ค่าจ่ายตลาด
-      const marketCostA = parseFloat(document.getElementById('marketCostA').value) || 0;
-      const marketCostB = parseFloat(document.getElementById('marketCostB').value) || 0;
+      const marketCostA = getValue('marketCostA');
+      const marketCostB = getValue('marketCostB');
       const totalMarketCost = marketCostA + marketCostB;
       document.getElementById('marketCostTotal').textContent = `ค่าจ่ายตลาดรวม: ${totalMarketCost.toFixed(2)} บาท`;
 
-    
-
-      // เงินคงเหลือ (ยอดขาย - ค่าใช้จ่าย)
       const netProfit = totalSales - totalExpenses;
-      document.getElementById('netProfit').textContent = `เงินคงเหลือ: ${netProfit.toFixed(2)} บาท`;
+      document.getElementById('netProfit').textContent = `เงินคงเหลือก่อนจ่ายตลาด: ${netProfit.toFixed(2)} บาท`;
 
-      // กำไรทั้งหมดก่อนหักค่าแรง (ยอดขาย - ค่าใช้จ่าย - ค่าจ่ายตลาด)
       const profitBeforeLabor = totalSales - totalExpenses - totalMarketCost;
-      document.getElementById('profitBeforeLabor').textContent = `กำไรทั้งหมดก่อนหักค่าแรง: ${profitBeforeLabor.toFixed(2)} บาท`;
+      document.getElementById('profitBeforeLabor').textContent = `กำไรก่อนหักค่าแรง: ${profitBeforeLabor.toFixed(2)} บาท`;
+
+      const laborMarch = getValue('laborMarch');
+      const laborMother = getValue('laborMother');
+      const laborBia = getValue('laborBia');
+      const oilCost = getValue('oilCost');
+      const otherCost = getValue('otherCost');
+      const totalLabor = laborMarch + laborMother + laborBia + oilCost + otherCost;
+
+      const netFinalProfit = profitBeforeLabor - totalLabor;
+      document.getElementById('netFinalProfit').textContent = `กำไรสุทธิหลังหักทั้งหมด: ${netFinalProfit.toFixed(2)} บาท`;
     }
 
     // เพิ่ม event listener ให้ทุกช่อง input
-    ['saleA', 'saleB', 'iceCost', 'rentCost', 'extraBuyCost', 'marketCostA', 'marketCostB'].forEach(id => {
+    [
+      'saleA', 'saleB', 'iceCost', 'rentCost', 'extraBuyCost',
+      'marketCostA', 'marketCostB',
+      'laborMarch', 'laborMother', 'laborBia', 'oilCost', 'otherCost'
+    ].forEach(id => {
       document.getElementById(id).addEventListener('input', calculateTotal);
     });
   </script>
