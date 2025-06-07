@@ -1,278 +1,281 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8" />
-<title>คำนวณกำไร</title>
-<style>
-    body {
-    font-size: 28px;
-    padding: 40px;
-    background-color: #f9f9f9;
-    font-family: sans-serif;
-    }
+    <!DOCTYPE html>
+    <html lang="th">
+    <head>
+    <meta charset="UTF-8" />
+    <title>คำนวณกำไร</title>
+    <style>
+        body {
+        font-size: 28px;
+        padding: 40px;
+        background-color: #f9f9f9;
+        font-family: sans-serif;
+        }
 
-    .header-row {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 30px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+        .header-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+        align-items: center;
+        flex-wrap: wrap;
+        }
 
-.header-row > div {
-  display: flex;
-  flex-direction: column;
-  min-width: 150px; /* หรือ 120px ถ้าอยากให้ยืดหยุ่นมากขึ้น */
-  flex: 1; /* เพิ่มเพื่อให้มันยืดเท่ากันในแนวกว้าง */
-}
-
-    .header-row label {
-      font-size: 22px;
-      color: #555;
-      margin-bottom: 6px;
-    }
-
-    .header-row input {
-      font-size: 24px;
-      padding: 8px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      background-color: #fff;
-    }
-
-    .row-2col {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    }
-
-    .col {
+    .header-row > div {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-width: 300px;
+    min-width: 150px; /* หรือ 120px ถ้าอยากให้ยืดหยุ่นมากขึ้น */
+    flex: 1; /* เพิ่มเพื่อให้มันยืดเท่ากันในแนวกว้าง */
     }
 
-    .col label {
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: #333;
-    }
+        .header-row label {
+        font-size: 22px;
+        color: #555;
+        margin-bottom: 6px;
+        }
 
-    .col input {
-    font-size: 28px;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    }
+        .header-row input {
+        font-size: 24px;
+        padding: 8px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        }
 
-  .result {
-width: 98%;  /* หรือขนาดที่ต้องการ */
-white-space: nowrap; /* ไม่ตัดคำ */
-overflow: hidden; /* ซ่อนเกิน */
-text-overflow: ellipsis; /* ใส่ ... ถ้าข้อความยาวเกิน */
-/* ที่เหลือคงเดิม */
-margin-top: 10px;
-font-weight: bold;
-padding: 15px;
-border-radius: 10px;
-font-size: 32px;
-}
+        .row-2col {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        }
 
-#t { background: #e0f7fa; color: #00796b; }
-#e { background: #fff3e0; color: #e65100; }
-#m { background: #fce4ec; color: #c2185b; }
-#n { background: #f3e5f5; color: #6a1b9a; }
-#p { background: #e8f5e9; color: #2e7d32; }
-#f { background: #ffebee; color: #b71c1c; }
-#check { background: #e3f2fd; color: #0d47a1; margin-top: 15px; }
-
-hr {
-    margin: 30px 0;
-    border: none;
-    height: 2px;
-    background-color: #ccc;
-}
-
-@media (max-width: 768px) {
-    .row-2col {
+        .col {
+        display: flex;
         flex-direction: column;
+        flex: 1;
+        min-width: 300px;
+        }
+
+        .col label {
+        font-size: 28px;
+        margin-bottom: 8px;
+        color: #333;
+        }
+
+        .col input {
+        font-size: 28px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        }
+
+    .result {
+    width: 98%;  /* หรือขนาดที่ต้องการ */
+    white-space: nowrap; /* ไม่ตัดคำ */
+    overflow: hidden; /* ซ่อนเกิน */
+    text-overflow: ellipsis; /* ใส่ ... ถ้าข้อความยาวเกิน */
+    /* ที่เหลือคงเดิม */
+    margin-top: 10px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 32px;
     }
-    .header-row {
-      flex-direction: column;
+
+    #t { background: #e0f7fa; color: #00796b; }
+    #e { background: #fff3e0; color: #e65100; }
+    #m { background: #fce4ec; color: #c2185b; }
+    #n { background: #f3e5f5; color: #6a1b9a; }
+    #p { background: #e8f5e9; color: #2e7d32; }
+    #f { background: #ffebee; color: #b71c1c; }
+    #check { background: #e3f2fd; color: #0d47a1; margin-top: 15px; }
+
+    hr {
+        margin: 30px 0;
+        border: none;
+        height: 2px;
+        background-color: #ccc;
     }
-}
-</style>
-</head>
-<body>
 
-<!-- วันที่และ บ.ช -->
-<div class="header-row">
-  <div>
-    📅 ว/ด/ป: <span id="d"></span>
-  </div>
-  <div>
-    <label for="accA">บ.ช ตามสั่ง</label>
-    <input id="accA" type="number" placeholder="เงินในบัญชีตามสั่ง" />
-  </div>
-  <div>
-    <label for="accB">บ.ช ขาหมู</label>
-    <input id="accB" type="number" placeholder="เงินในบัญชีขาหมู" />
-  </div>
-</div>
+    @media (max-width: 768px) {
+        .row-2col {
+            flex-direction: column;
+        }
+        .header-row {
+        flex-direction: column;
+        }
+    }
+    </style>
+    </head>
+    <body>
 
-<!-- ขาย -->
-<div class="row-2col">
-<div class="col">
-    <label for="a">💰 ยอดขายตามสั่ง</label>
-    <input id="a" type="number"placeholder="ยอดขายตามสั่ง" />
-</div>
-<div class="col">
-    <label for="b">💰 ยอดขายขาหมู</label>
-    <input id="b" type="number" placeholder="ยอดขายขาหมู"/>
-</div>
-</div>
-<div class="result" id="t">ยอดขายรวม: 0</div>
-<hr>
+    <!-- วันที่และ บ.ช -->
+    <div class="header-row">
+    <div>
+        📅 ว/ด/ป: <span id="d"></span>
+    </div>
+    <div>
+        <label for="accA">บ.ช ตามสั่ง</label>
+        <input id="accA" type="number" placeholder="เงินในบัญชีตามสั่ง" />
+    </div>
+    <div>
+        <label for="accB">บ.ช ขาหมู</label>
+        <input id="accB" type="number" placeholder="เงินในบัญชีขาหมู" />
+    </div>
+    </div>
 
-<!-- รายจ่าย -->
-<div class="row-2col">
-<div class="col">
-    <label for="ice">🧊 ค่าน้ำแข็ง</label>
-    <input id="ice" type="number" placeholder="ค่าน้ำแข็ง" />
-</div>
-<div class="col">
-    <label for="rent">🏠 ค่าเช่า</label>
-    <input id="rent" type="number" placeholder="ค่าเช่า"/>
-</div>
-</div>
-<div class="row-2col">
-<div class="col">
-    <label for="buy">🛒 ค่าซื้อของอื่นๆ</label>
-    <input id="buy" type="number"  placeholder="ค่าซื้อของอื่นๆ"/>
-</div>
-</div>
-<div class="result" id="e">ค่าใช้จ่ายรวม: 0</div>
-<div class="result" id="n">เงินเหลือก่อนจ่ายตลาด: 0</div>
+    <!-- ขาย -->
+    <div class="row-2col">
+    <div class="col">
+        <label for="a">💰 ยอดขายตามสั่ง</label>
+        <input id="a" type="number"placeholder="ยอดขายตามสั่ง" />
+    </div>
+    <div class="col">
+        <label for="b">💰 ยอดขายขาหมู</label>
+        <input id="b" type="number" placeholder="ยอดขายขาหมู"/>
+    </div>
+    </div>
+    <div class="result" id="t">ยอดขายรวม: 0</div>
+    <hr>
 
-<!-- เช็คเงินในระบบ -->
-<div class="row-2col" style="margin-top:20px;">
-  <div class="col">
-    <label for="sysAccB">บ.ช ขาหมู (เงินในบัญชี)</label>
-    <input id="sysAccB" type="number" placeholder="เงินในบัญชีขาหมู" />
-  </div>
-  <div class="col">
-    <label for="sysAccA">บ.ช ตามสั่ง (เงินในบัญชี)</label>
-    <input id="sysAccA" type="number" placeholder="เงินในบัญชีตามสั่ง" />
-  </div>
-</div>
-<div class="row-2col" style="margin-bottom:20px;">
-  <div class="col">
-    <label for="cashB">เงินสด ขาหมู</label>
-    <input id="cashB" type="number" placeholder="เงินสด ขาหมู" />
-  </div>
-  <div class="col">
-    <label for="cashA">เงินสด ตามสั่ง</label>
-    <input id="cashA" type="number" placeholder="เงินสดตามสั่ง" />
-  </div>
-</div>
-<div class="result" id="check">รวมเงินที่มีในกระเป๋าวันนี้: 0 </div>
+    <!-- รายจ่าย -->
+    <div class="row-2col">
+    <div class="col">
+        <label for="ice">🧊 ค่าน้ำแข็ง</label>
+        <input id="ice" type="number" placeholder="ค่าน้ำแข็ง" />
+    </div>
+    <div class="col">
+        <label for="rent">🏠 ค่าเช่า</label>
+        <input id="rent" type="number" placeholder="ค่าเช่า"/>
+    </div>
+    </div>
+    <div class="row-2col">
+    <div class="col">
+        <label for="buy">🛒 ค่าซื้อของอื่นๆ</label>
+        <input id="buy" type="number"  placeholder="ค่าซื้อของอื่นๆ"/>
+    </div>
+    </div>
+    <div class="result" id="e">ค่าใช้จ่ายรวม: 0</div>
+    <div class="result" id="n">เงินเหลือก่อนจ่ายตลาด: 0</div>
 
-<hr>
+    <!-- เช็คเงินในระบบ -->
+    <div class="row-2col" style="margin-top:20px;">
+        <div class="col">
+        <label for="sysAccA">บ.ช ตามสั่ง (เงินในบัญชี)</label>
+        <input id="sysAccA" type="number" placeholder="เงินในบัญชีตามสั่ง" />
+    </div>
+        <div class="col">
+        <label for="cashA">เงินสด ตามสั่ง</label>
+        <input id="cashA" type="number" placeholder="เงินสดตามสั่ง" />
+    </div>
+    
+    </div>
+    <div class="row-2col" style="margin-bottom:20px;">
+    <div class="col">
+        <label for="sysAccB">บ.ช ขาหมู (เงินในบัญชี)</label>
+        <input id="sysAccB" type="number" placeholder="เงินในบัญชีขาหมู" />
+    </div>
+    
+    <div class="col">
+        <label for="cashB">เงินสด ขาหมู</label>
+        <input id="cashB" type="number" placeholder="เงินสด ขาหมู" />
+    </div>
+    
+    </div>
+    <div class="result" id="check">รวมเงินที่มีในกระเป๋าวันนี้: 0 </div>
 
-<!-- ตลาด -->
-<div class="row-2col">
-<div class="col">
-    <label for="mA">🥬 จ่ายตลาดตามสั่ง</label>
-    <input id="mA" type="number"placeholder="จ่ายตลาดตามสั่ง" />
-</div>
-<div class="col">
-    <label for="mB">🥩 จ่ายตลาดขาหมู</label>
-    <input id="mB" type="number" placeholder="จ่ายตลาดขาหมู"/>
-</div>
-</div>
-<div class="result" id="m">จ่ายตลาดรวม: 0</div>
-<hr>
+    <hr>
 
-<!-- กำไร -->
-<div class="result" id="p">กำไรที่ได้ก่อนหักค่าแรง: 0</div>
-<hr>
+    <!-- ตลาด -->
+    <div class="row-2col">
+    <div class="col">
+        <label for="mA">🥬 จ่ายตลาดตามสั่ง</label>
+        <input id="mA" type="number"placeholder="จ่ายตลาดตามสั่ง" />
+    </div>
+    <div class="col">
+        <label for="mB">🥩 จ่ายตลาดขาหมู</label>
+        <input id="mB" type="number" placeholder="จ่ายตลาดขาหมู"/>
+    </div>
+    </div>
+    <div class="result" id="m">จ่ายตลาดรวม: 0</div>
+    <hr>
 
-<!-- ค่าแรงและอื่นๆ -->
-<div class="row-2col">
-<div class="col">
-    <label for="m1">👨‍🍳 มาร์ช/แม่</label>
-    <input id="m1" type="number"placeholder="ค่าจ้าง" />
-</div>
-<div class="col">
-    <label for="beer">🍺 เบียร์</label>
-    <input id="beer" type="number" placeholder="ค่าเบียร์"/>
-</div>
-</div>
-<div class="row-2col">
-<div class="col">
-    <label for="oil">⛽ น้ำมัน</label>
-    <input id="oil" type="number"placeholder="ค่าน้ำมัน" />
-</div>
-<div class="col">
-    <label for="more">🧾 อื่นๆ</label>
-    <input id="more" type="number"placeholder="อื่นๆ" />
-</div>
-</div>
-<div class="result" id="f">💵 กำไรสุทธิ: 0</div>
+    <!-- กำไร -->
+    <div class="result" id="p">กำไรที่ได้ก่อนหักค่าแรง: 0</div>
+    <hr>
 
-<!-- Script -->
-<script>
-const $ = id => document.getElementById(id);
-const update = () => {
-    let a = +$('a').value || 0, b = +$('b').value || 0;
-    let total = a + b;
-    $('t').textContent = `รวม: ${total.toFixed(2)}`;
+    <!-- ค่าแรงและอื่นๆ -->
+    <div class="row-2col">
+    <div class="col">
+        <label for="m1">👨‍🍳 มาร์ช/แม่</label>
+        <input id="m1" type="number"placeholder="ค่าจ้าง" />
+    </div>
+    <div class="col">
+        <label for="beer">🍺 เบียร์</label>
+        <input id="beer" type="number" placeholder="ค่าเบียร์"/>
+    </div>
+    </div>
+    <div class="row-2col">
+    <div class="col">
+        <label for="oil">⛽ น้ำมัน</label>
+        <input id="oil" type="number"placeholder="ค่าน้ำมัน" />
+    </div>
+    <div class="col">
+        <label for="more">🧾 อื่นๆ</label>
+        <input id="more" type="number"placeholder="อื่นๆ" />
+    </div>
+    </div>
+    <div class="result" id="f">💵 กำไรสุทธิ: 0</div>
 
-    let e = (+$('ice').value || 0) + (+$('rent').value || 0) + (+$('buy').value || 0);
-    $('e').textContent = `จ่ายรวม: ${e.toFixed(2)}`;
+    <!-- Script -->
+    <script>
+    const $ = id => document.getElementById(id);
+    const update = () => {
+        let a = +$('a').value || 0, b = +$('b').value || 0;
+        let total = a + b;
+        $('t').textContent = `รวม: ${total.toFixed(2)}`;
 
-    let m = (+$('mA').value || 0) + (+$('mB').value || 0);
-    $('m').textContent = `จ่ายตลาดรวม: ${m.toFixed(2)}`;
+        let e = (+$('ice').value || 0) + (+$('rent').value || 0) + (+$('buy').value || 0);
+        $('e').textContent = `จ่ายรวม: ${e.toFixed(2)}`;
 
-    let n = total - e;
-    $('n').textContent = `เหลือก่อนจ่ายตลาด: ${n.toFixed(2)}`;
+        let m = (+$('mA').value || 0) + (+$('mB').value || 0);
+        $('m').textContent = `จ่ายตลาดรวม: ${m.toFixed(2)}`;
 
-   // เช็คเงินในระบบ
-let accA = +$('accA').value || 0;
-let accB = +$('accB').value || 0;
-let sysAccB = +$('sysAccB').value || 0;
-let sysAccA = +$('sysAccA').value || 0;
-let cashB = +$('cashB').value || 0;
-let cashA = +$('cashA').value || 0;
-let sumA=sysAccA-accA;
-let sumb=sysAccB-accB;
-let sumSys = sumA + sumb + cashB + cashA;
+        let n = total - e;
+        $('n').textContent = `เหลือก่อนจ่ายตลาด: ${n.toFixed(2)}`;
 
-let diff = sumSys - n;  // ความต่างระหว่างเงินรวมในระบบ กับ เงินเหลือก่อนจ่ายตลาด
-let status = '';
-if (Math.abs(diff) < 0.01) {
-  status = '✅ เงินตรงกัน';
-} else {
-  status = ` ❌ ไม่ตรงกัน ${diff.toFixed(2)} บาท`;
-}
-$('check').textContent = `รวมเงินที่ได้วันนี้ ${sumSys.toFixed(2)}  ${status}`;
+    // เช็คเงินในระบบ
+    let accA = +$('accA').value || 0;
+    let accB = +$('accB').value || 0;
+    let sysAccB = +$('sysAccB').value || 0;
+    let sysAccA = +$('sysAccA').value || 0;
+    let cashB = +$('cashB').value || 0;
+    let cashA = +$('cashA').value || 0;
+    let sumA=sysAccA-accA;
+    let sumb=sysAccB-accB;
+    let sumSys = sumA + sumb + cashB + cashA;
 
-    let p = n - m;
-    $('p').textContent = `กำไรก่อนค่าแรง: ${p.toFixed(2)}`;
+    let diff = sumSys - n;  // ความต่างระหว่างเงินรวมในระบบ กับ เงินเหลือก่อนจ่ายตลาด
+    let status = '';
+    if (Math.abs(diff) < 0.01) {
+    status = '✅ เงินตรงกัน';
+    } else {
+    status = ` ❌ ไม่ตรงกัน ${diff.toFixed(2)} บาท`;
+    }
+    $('check').textContent = `รวมเงินที่ได้วันนี้ ${sumSys.toFixed(2)}  ${status}`;
 
-    let f = p - ((+$('m1').value || 0) + (+$('beer').value || 0) + (+$('oil').value || 0) + (+$('more').value || 0));
-    $('f').textContent = `💵 กำไรสุทธิ: ${f.toFixed(2)}`;
-};
+        let p = n - m;
+        $('p').textContent = `กำไรก่อนค่าแรง: ${p.toFixed(2)}`;
 
-['a','b','ice','rent','buy','mA','mB','m1','beer','oil','more','sysAccB','sysAccA','cashB','cashA'].forEach(id => {
-    $(id).addEventListener('input', update);
-});
+        let f = p - ((+$('m1').value || 0) + (+$('beer').value || 0) + (+$('oil').value || 0) + (+$('more').value || 0));
+        $('f').textContent = `💵 กำไรสุทธิ: ${f.toFixed(2)}`;
+    };
 
-$('d').textContent = new Date().toLocaleDateString('th-TH');
-</script>
+    ['a','b','ice','rent','buy','mA','mB','m1','beer','oil','more','sysAccB','sysAccA','cashB','cashA'].forEach(id => {
+        $(id).addEventListener('input', update);
+    });
 
-</body>
-</html>
+    $('d').textContent = new Date().toLocaleDateString('th-TH');
+    </script>
+
+    </body>
+    </html>
