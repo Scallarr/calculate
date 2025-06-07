@@ -5,36 +5,54 @@
   <title>คำนวณกำไร</title>
   <style>
     body {
-      font-size: 40px;
-      padding: 20px;
+      font-size: 36px;
+      padding: 40px;
       background-color: #f9f9f9;
       font-family: sans-serif;
     }
-    input {
-      width: 100%;
-      font-size: 40px;
+
+    .row {
+      display: flex;
+      align-items: center;
       margin-bottom: 20px;
+    }
+
+    .row label {
+      width: 250px;
+      margin-right: 10px;
+      font-size: 36px;
+      color: #333;
+    }
+
+    .row input {
+      flex: 1;
+      font-size: 36px;
       padding: 10px;
       border: 2px solid #ccc;
       border-radius: 8px;
+      background-color: #fff;
     }
+
     .result {
       margin-top: 10px;
       font-weight: bold;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 36px;
     }
+
     #t { background: #e0f7fa; color: #00796b; }
     #e { background: #fff3e0; color: #e65100; }
     #m { background: #fce4ec; color: #c2185b; }
     #n { background: #f3e5f5; color: #6a1b9a; }
     #p { background: #e8f5e9; color: #2e7d32; }
     #f { background: #ffebee; color: #b71c1c; }
+
     hr {
-      margin: 20px 0;
+      margin: 30px 0;
       border: none;
       height: 2px;
-      background-color: #ddd;
+      background-color: #ccc;
     }
   </style>
 </head>
@@ -42,32 +60,64 @@
 
 <div>📅 วันที่: <span id="d"></span></div>
 
-<input id="a" type="number" placeholder="💰 ขายตามสั่ง" />
-<input id="b" type="number" placeholder="💰 ขายขาหมู" />
-<div class="result" id="t">รวม: 0</div>
+<div class="row">
+  <label for="a">💰 ขายตามสั่ง</label>
+  <input id="a" type="number" placeholder="ยอดตามสั่ง"/>
+</div>
+<div class="row">
+  <label for="b">💰 ขายขาหมู</label>
+  <input id="b" type="number"placeholder="ยอดขาหมู"/>
+</div>
+<div class="result" id="t">ยอดขายรวม: 0</div>
 <hr>
 
-<input id="ice" type="number" placeholder="🧊 น้ำแข็ง" />
-<input id="rent" type="number" placeholder="🏠 ค่าเช่า" />
-<input id="buy" type="number" placeholder="🛒 ซื้อของ" />
+<div class="row">
+  <label for="ice">🧊 น้ำแข็ง</label>
+  <input id="ice" type="number" placeholder="ค่าน้ำแข็ง"/>
+</div>
+<div class="row">
+  <label for="rent">🏠 ค่าเช่า</label>
+  <input id="rent" type="number"placeholder="ค่าเช่า" />
+</div>
+<div class="row">
+  <label for="buy">🛒 ซื้อของ</label>
+  <input id="buy" type="number" placeholder="ค่าซื้อของระหว่างวัน"/>
+</div>
 <div class="result" id="e">จ่ายรวม: 0</div>
+<div class="result" id="n">เหลือก่อนจ่ายตลาด: 0</div>
 <hr>
 
-<input id="mA" type="number" placeholder="🥬 ตลาดตามสั่ง" />
-<input id="mB" type="number" placeholder="🥩 ตลาดขาหมู" />
-<div class="result" id="m">ตลาดรวม: 0</div>
+<div class="row">
+  <label for="mA">🥬 ตลาดตามสั่ง</label>
+  <input id="mA" type="number"placeholder="จ่ายตลาดตามสั่ง" />
+</div>
+<div class="row">
+  <label for="mB">🥩 ตลาดขาหมู</label>
+  <input id="mB" type="number"placeholder="จ่ายตลาดขาหมู" />
+</div>
+<div class="result" id="m">จ่ายตลาดรวม: 0</div>
 <hr>
 
-<div class="result" id="n">เหลือก่อนตลาด: 0</div>
 <div class="result" id="p">กำไรก่อนค่าแรง: 0</div>
 <hr>
 
-<input id="m1" type="number" placeholder="👨‍🍳 มาร์ช" />
-<input id="m2" type="number" placeholder="👩‍🍳 แม่" />
-<input id="beer" type="number" placeholder="🍺 เบียร์" />
-<input id="oil" type="number" placeholder="⛽ น้ำมัน" />
-<input id="more" type="number" placeholder="🧾 อื่นๆ" />
-<div class="result" id="f">💵 กำไรสุทธิ: 0</div>
+<div class="row">
+  <label for="m1">👨‍🍳 มาร์ช/แม่</label>
+  <input id="m1" type="number"placeholder="ค่าแรง" />
+</div>
+<div class="row">
+  <label for="beer">🍺 เบียร์</label>
+  <input id="beer" type="number"placeholder="ค่าเบียร์" />
+</div>
+<div class="row">
+  <label for="oil">⛽ น้ำมัน</label>
+  <input id="oil" type="number" placeholder="ค่าน้ำมัน"/>
+</div>
+<div class="row">
+  <label for="more">🧾 อื่นๆ</label>
+  <input id="more" type="number" placeholder="ค่าอื่นๆ"/>
+</div>
+<div class="result" id="f">💵 กำไรสุทธิ: 0</div>   
 
 <script>
   const $ = id => document.getElementById(id);
@@ -80,19 +130,19 @@
     $('e').textContent = `จ่ายรวม: ${e.toFixed(2)}`;
 
     let m = (+$('mA').value || 0) + (+$('mB').value || 0);
-    $('m').textContent = `ตลาดรวม: ${m.toFixed(2)}`;
+    $('m').textContent = `จ่ายตลาดรวม: ${m.toFixed(2)}`;
 
     let n = total - e;
-    $('n').textContent = `เหลือก่อนตลาด: ${n.toFixed(2)}`;
+    $('n').textContent = `เหลือก่อนจ่ายตลาด: ${n.toFixed(2)}`;
 
     let p = n - m;
     $('p').textContent = `กำไรก่อนค่าแรง: ${p.toFixed(2)}`;
 
-    let f = p - ((+$('m1').value || 0) + (+$('m2').value || 0) + (+$('beer').value || 0) + (+$('oil').value || 0) + (+$('more').value || 0));
+    let f = p - ((+$('m1').value || 0) + (+$('beer').value || 0) + (+$('oil').value || 0) + (+$('more').value || 0));
     $('f').textContent = `💵 กำไรสุทธิ: ${f.toFixed(2)}`;
   };
 
-  ['a','b','ice','rent','buy','mA','mB','m1','m2','beer','oil','more'].forEach(id => {
+  ['a','b','ice','rent','buy','mA','mB','m1','beer','oil','more'].forEach(id => {
     $(id).addEventListener('input', update);
   });
 
