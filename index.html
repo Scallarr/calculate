@@ -381,3 +381,34 @@
   }
 
   function calcBack() {
+    $('calcDisplay').value = $('calcDisplay').value.slice(0, -1);
+  }
+
+  function calcCalculate() {
+    const display = $('calcDisplay');
+    try {
+      let result = eval(display.value.replace(/[^0-9+\-*/().]/g, ''));
+      if (!isNaN(result)) {
+        result = +result.toFixed(2);
+        display.value = result;
+        $('buy').value = result;
+        update();
+      } else {
+        alert("ผลลัพธ์ไม่ถูกต้อง");
+      }
+    } catch {
+      alert("สูตรไม่ถูกต้อง");
+    }
+  }
+
+  function calcKey(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      calcCalculate();
+    }
+  }
+
+  $('d').textContent = new Date().toLocaleDateString('th-TH');
+</script>
+</body>
+</html>
