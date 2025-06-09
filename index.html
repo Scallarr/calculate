@@ -116,6 +116,7 @@
       cursor: pointer;
     }
 
+    /* Calculator Modal */
     #calcModal {
       display: none;
       position: fixed;
@@ -180,27 +181,119 @@
       cursor: pointer;
       font-size: 18px;
     }
-
-    .clear-button {
-      margin-top: 30px;
-      background: #ffcccb;
-      color: #b71c1c;
-      font-size: 20px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
 
-<!-- ส่วน HTML คำนวณรายรับ รายจ่าย กำไร (เหมือนของคุณ) -->
+<div class="header-row">
+  <div>📅 ว/ด/ป: <span id="d"></span></div>
+  <div>
+    <label for="accA">บ.ชคงเหลือตามสั่ง</label>
+    <input id="accA" type="number" placeholder="ยอดบ.ช ตามสั่ง" />
+  </div>
+  <div>
+    <label for="accB">บ.ชคงเหลือขาหมู</label>
+    <input id="accB" type="number" placeholder="ยอดบ.ช ขาหมู" />
+  </div>
+</div>
+<div class="result" id="f">💵 กำไรสุทธิวันนี้: 0</div>
+<div class="row-2col">
+  <div class="col">
+    <label for="a">💰 ยอดขายตามสั่ง</label>
+    <input id="a" type="number" placeholder="ยอดขายตามสั่ง" />
+  </div>
+  <div class="col">
+    <label for="b">💰 ยอดขายขาหมู</label>
+    <input id="b" type="number" placeholder="ยอดขายขาหมู" />
+  </div>
+</div>
+<div class="result" id="t">ยอดขายรวม: 0</div>
+<hr>
 
-<!-- ปุ่มล้างข้อมูล -->
-<button onclick="clearData()" class="clear-button">🗑️ ล้างข้อมูลทั้งหมด</button>
+<div class="row-2col">
+  <div class="col">
+    <label for="ice">🧊 ค่าน้ำแข็ง</label>
+    <input id="ice" type="number" placeholder="ค่าน้ำแข็ง" />
+  </div>
+  <div class="col">
+    <label for="rent">🏠 ค่าเช่า</label>
+    <input id="rent" type="number" placeholder="ค่าเช่า" />
+  </div>
+</div>
+<div class="row-2col">
+  <div class="col">
+    <label for="buy">🛒 ค่าซื้อของอื่นๆ</label>
+    <div class="calc-container">
+      <input id="buy" type="number" placeholder="ค่าซื้อของอื่นๆ" />
+      <button class="calc-button" onclick="showCalculator()">🧮</button>
+    </div>
+  </div>
+</div>
+<!-- <div class="result" id="e">ค่าใช้จ่ายรวม: 0</div> -->
+<div class="result" id="n">เงินเหลือก่อนจ่ายตลาด: 0</div>
 
-<!-- เครื่องคิดเลข -->
+<div class="row-2col">
+  <div class="col">
+    <label for="sysAccA">บ.ช ตามสั่ง</label>
+    <input id="sysAccA" type="number" placeholder="เงินในบ.ช ตามสั่ง" />
+  </div>
+  <div class="col">
+    <label for="cashA">เงินสด ตามสั่ง</label>
+    <input id="cashA" type="number" placeholder="เงินสด ตามสั่ง" />
+  </div>
+</div>
+<div class="row-2col">
+  <div class="col">
+    <label for="sysAccB">บ.ช ขาหมู</label>
+    <input id="sysAccB" type="number" placeholder="เงินในบ.ช ขาหมู" />
+  </div>
+  <div class="col">
+    <label for="cashB">เงินสด ขาหมู</label>
+    <input id="cashB" type="number" placeholder="เงินสด ขาหมู" />
+  </div>
+</div>
+<div class="result" id="check">รวมเงินที่มีในกระเป๋าวันนี้: 0</div>
+<hr>
+
+<div class="row-2col">
+  <div class="col">
+    <label for="mA">🥬 จ่ายตลาดตามสั่ง</label>
+    <input id="mA" type="number" placeholder="ตลาดตามสั่ง" />
+  </div>
+  <div class="col">
+    <label for="mB">🥩 จ่ายตลาดขาหมู</label>
+    <input id="mB" type="number" placeholder="ตลาดขาหมู" />
+  </div>
+</div>
+<div class="result" id="m">จ่ายตลาดรวม: 0</div>
+<hr>
+
+<div class="result" id="p">กำไรที่ได้ก่อนหักค่าแรง: 0</div>
+<hr>
+
+<div class="row-2col">
+  <div class="col">
+    <label for="m1">👨‍🍳 มาร์ช/แม่</label>
+    <input id="m1" type="number" placeholder="ค่าแรง มาร์ช/แม่" />
+  </div>
+  <div class="col">
+    <label for="beer">🍺 เบียร์</label>
+    <input id="beer" type="number" placeholder="ค่าเบียร์" />
+  </div>
+</div>
+<div class="row-2col">
+  <div class="col">
+    <label for="oil">⛽ น้ำมัน</label>
+    <input id="oil" type="number" placeholder="ค่าน้ำมัน" />
+  </div>
+  <div class="col">
+    <label for="more">🧾 อื่นๆ</label>
+    <input id="more" type="number" placeholder="ค่าอื่นๆ" />
+  </div>
+</div>
+
+
+<!-- Calculator Modal -->
 <div id="calcModal">
   <input type="text" id="calcDisplay" readonly onkeydown="calcKey(event)" />
   <div id="calcButtons">
@@ -230,23 +323,14 @@
 <script>
   const $ = id => document.getElementById(id);
 
-  const ids = [
-    'a','b','ice','rent','buy','mA','mB','m1','beer','oil','more',
-    'sysAccB','sysAccA','cashB','cashA','accA','accB'
-  ];
-
-  // โหลดข้อมูลจาก localStorage เมื่อเปิดหน้า
-  ids.forEach(id => {
-    const saved = localStorage.getItem(id);
-    if (saved !== null) $(id).value = saved;
-  });
-
   function update() {
     let a = +$('a').value || 0, b = +$('b').value || 0;
     let total = a + b;
     $('t').textContent = `ยอดขายรวม: ${total.toFixed(2)}`;
 
     let e = (+$('ice').value || 0) + (+$('rent').value || 0) + (+$('buy').value || 0);
+   
+
     let m = (+$('mA').value || 0) + (+$('mB').value || 0);
     $('m').textContent = `จ่ายตลาดรวม: ${m.toFixed(2)}`;
 
@@ -270,24 +354,10 @@
 
     let f = p - ((+$('m1').value || 0) + (+$('beer').value || 0) + (+$('oil').value || 0) + (+$('more').value || 0));
     $('f').textContent = `💵 กำไรสุทธิ: ${f.toFixed(2)}`;
-
-    // Save to localStorage
-    ids.forEach(id => {
-      localStorage.setItem(id, $(id).value);
-    });
   }
 
-  ids.forEach(id => $(id).addEventListener('input', update));
-
-  function clearData() {
-    if (confirm('คุณแน่ใจว่าต้องการล้างข้อมูลทั้งหมดหรือไม่?')) {
-      ids.forEach(id => {
-        localStorage.removeItem(id);
-        $(id).value = '';
-      });
-      update();
-    }
-  }
+  ['a','b','ice','rent','buy','mA','mB','m1','beer','oil','more','sysAccB','sysAccA','cashB','cashA','accA','accB']
+    .forEach(id => $(id).addEventListener('input', update));
 
   function showCalculator() {
     $('calcModal').style.display = 'block';
@@ -311,35 +381,3 @@
   }
 
   function calcBack() {
-    $('calcDisplay').value = $('calcDisplay').value.slice(0, -1);
-  }
-
-  function calcCalculate() {
-    const display = $('calcDisplay');
-    try {
-      let result = eval(display.value.replace(/[^0-9+\-*/().]/g, ''));
-      if (!isNaN(result)) {
-        result = +result.toFixed(2);
-        display.value = result;
-        $('buy').value = result;
-        update();
-      } else {
-        alert("ผลลัพธ์ไม่ถูกต้อง");
-      }
-    } catch {
-      alert("สูตรไม่ถูกต้อง");
-    }
-  }
-
-  function calcKey(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      calcCalculate();
-    }
-  }
-
-  $('d') && ($('d').textContent = new Date().toLocaleDateString('th-TH'));
-  update();
-</script>
-</body>
-</html>
